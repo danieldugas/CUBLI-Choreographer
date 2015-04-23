@@ -6,17 +6,30 @@
 
 QT       += core gui
 
+# serial port
+greaterThan(QT_MAJOR_VERSION, 4) {
+    QT       += widgets serialport
+} else {
+    include($$QTSERIALPORT_PROJECT_ROOT/src/serialport/qt4support/serialport.prf)
+}
+
+#widgets
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = CUBLIchoreographer
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-    timeline.cpp
+SOURCES +=  main.cpp\
+            mainwindow.cpp \
+            timeline.cpp \
+            serialmanager.cpp \
+            settingsdialog.cpp
 
 HEADERS  += mainwindow.h \
-    timeline.h
+            timeline.h \
+            serialmanager.h \
+            settingsdialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui\
+            settingsdialog.ui

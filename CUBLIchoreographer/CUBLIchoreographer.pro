@@ -24,12 +24,16 @@ SOURCES +=  main.cpp\
             mainwindow.cpp \
             timeline.cpp \
             serialmanager.cpp \
-            settingsdialog.cpp
+            settingsdialog.cpp \
+            com_protocol.cpp \
+    comstatemanager.cpp
 
 HEADERS  += mainwindow.h \
             timeline.h \
             serialmanager.h \
-            settingsdialog.h
+            settingsdialog.h \
+            com_protocol.h \
+    comstatemanager.h
 
 FORMS    += mainwindow.ui\
             settingsdialog.ui

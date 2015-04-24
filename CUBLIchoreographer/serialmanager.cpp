@@ -1,5 +1,7 @@
 #include "serialmanager.h"
 
+extern com_id this_pc_id;
+
 SerialManager::SerialManager(MainWindow *parentWindow) :
     parent(parentWindow)
 {
@@ -48,10 +50,18 @@ int SerialManager::openSerialPort()
 
 void SerialManager::write(QByteArray writeData)
 {
-    serial->write(writeData);
+    if (serial->isOpen())
+    {
+        serial->write(writeData);
+    }
+    else
+    {
+        parent->showSerialStatus(QObject::tr("No data sent: device not open"));
+    }
 }
 
-void SerialManager::read()
+QByteArray SerialManager::read()
 {
-    parent->showSerialData(QString(serial->readAll()));
+    return serial->readAll();
+
 }

@@ -7,9 +7,9 @@
 
 #include "mainwindow.h"
 #include "settingsdialog.h"
+#include "com_protocol.h"
 
 class MainWindow;
-
 
 class SerialManager
 {
@@ -24,7 +24,7 @@ public:
     // SHOULD BE PRIVATE
     QSerialPort *serial;
 
-    void read();
+    QByteArray read();
 
 
 private:

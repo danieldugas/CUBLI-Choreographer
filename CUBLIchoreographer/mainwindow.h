@@ -7,13 +7,20 @@
 #include <QGraphicsItem>
 #include <QScrollBar>
 #include <vector>
+
 #include "timeline.h"
 #include "serialmanager.h"
 #include "settingsdialog.h"
+#include "com_protocol.h"
+#include "comstatemanager.h"
+
+
+
 
 // Circular dependencies
 class SerialManager;
 class Timeline;
+class ComStateManager;
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +37,7 @@ public:
     DeleteTimelineGraphicsView(QGraphicsView *view);
     showSerialStatus(const QString& text);
     showSerialData(const QString& text);
+    sendMessage(com_mcode message_code, char * extra_content, com_id recipient);
 
 private slots:
     addTimeline();
@@ -42,6 +50,7 @@ private:
     Ui::MainWindow *ui;
     std::vector<Timeline*> timelines;
     SerialManager *serialmanager;
+    ComStateManager *comstatemanager;
 
 
 };

@@ -38,6 +38,9 @@
 #include <QDialog>
 #include <QtSerialPort/QSerialPort>
 
+#include "serialmanager.h"
+class SerialManager;
+
 QT_USE_NAMESPACE
 
 QT_BEGIN_NAMESPACE
@@ -70,6 +73,7 @@ public:
         bool localEchoEnabled;
     };
 
+    explicit SettingsDialog(SerialManager * sm);
     explicit SettingsDialog(QWidget *parent = 0);
     ~SettingsDialog();
 
@@ -90,6 +94,8 @@ private:
     Ui::SettingsDialog *ui;
     Settings currentSettings;
     QIntValidator *intValidator;
+
+    SerialManager * serialmanager;
 };
 
 #endif // SETTINGSDIALOG_H

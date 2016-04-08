@@ -19,6 +19,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = CUBLIchoreographer
 TEMPLATE = app
 
+CONFIG += c++11
+QMAKE_CXXFLAGS += -std=c++11 -Wall -pedantic
 
 SOURCES +=  main.cpp\
             mainwindow.cpp \
@@ -26,14 +28,16 @@ SOURCES +=  main.cpp\
             serialmanager.cpp \
             settingsdialog.cpp \
             com_protocol.cpp \
-    comstatemanager.cpp
+            comstatemanager.cpp \
+            primitive.cpp
 
 HEADERS  += mainwindow.h \
             timeline.h \
             serialmanager.h \
             settingsdialog.h \
             com_protocol.h \
-    comstatemanager.h
+            comstatemanager.h \
+            primitive.h
 
 FORMS    += mainwindow.ui\
             settingsdialog.ui

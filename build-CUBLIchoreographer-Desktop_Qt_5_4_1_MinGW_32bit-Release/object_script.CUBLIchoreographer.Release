@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\timeline.o
+./release\serialmanager.o
+./release\settingsdialog.o
+./release\com_protocol.o
+./release\comstatemanager.o
+./release\primitive.o
+./release\moc_mainwindow.o
+./release\moc_settingsdialog.o
+);

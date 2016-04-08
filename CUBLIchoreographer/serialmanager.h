@@ -10,6 +10,7 @@
 #include "com_protocol.h"
 
 class MainWindow;
+class SettingsDialog;
 
 class SerialManager
 {
@@ -19,13 +20,11 @@ public:
     ~SerialManager();
     int openSerialPort();
     void write(QByteArray writeData);
-    showSettingsDialog();
+    void showSettingsDialog();
+    QByteArray read();
 
     // SHOULD BE PRIVATE
     QSerialPort *serial;
-
-    QByteArray read();
-
 
 private:
     MainWindow *parent;

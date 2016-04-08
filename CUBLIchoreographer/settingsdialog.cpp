@@ -43,10 +43,40 @@ QT_USE_NAMESPACE
 
 static const char blankString[] = QT_TRANSLATE_NOOP("SettingsDialog", "N/A");
 
+SettingsDialog::SettingsDialog(SerialManager * sm) :
+    QDialog(NULL),
+    ui(new Ui::SettingsDialog)
+{
+    serialmanager = sm;
+
+    // COPY PASTED FROM CONSTRUCTOR BELOW
+    ui->setupUi(this);
+
+    intValidator = new QIntValidator(0, 4000000, this);
+
+    ui->baudRateBox->setInsertPolicy(QComboBox::NoInsert);
+
+    connect(ui->applyButton, SIGNAL(clicked()),
+            this, SLOT(apply()));
+    connect(ui->serialPortInfoListBox, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(showPortInfo(int)));
+    connect(ui->baudRateBox, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(checkCustomBaudRatePolicy(int)));
+    connect(ui->serialPortInfoListBox, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(checkCustomDevicePathPolicy(int)));
+
+    fillPortsParameters();
+    fillPortsInfo();
+
+    updateSettings();
+}
+
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SettingsDialog)
 {
+    serialmanager = NULL;
+
     ui->setupUi(this);
 
     intValidator = new QIntValidator(0, 4000000, this);
@@ -95,6 +125,8 @@ void SettingsDialog::showPortInfo(int idx)
 void SettingsDialog::apply()
 {
     updateSettings();
+    if ( serialmanager ) serialmanager->openSerialPort();
+
     hide();
 }
 

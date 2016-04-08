@@ -6,7 +6,7 @@ SerialManager::SerialManager(MainWindow *parentWindow) :
     parent(parentWindow)
 {
     serial = new QSerialPort;
-    settings = new SettingsDialog;
+    settings = new SettingsDialog(this);
 
 }
 
@@ -15,7 +15,7 @@ SerialManager::~SerialManager()
 
 }
 
-SerialManager::showSettingsDialog()
+void SerialManager::showSettingsDialog()
 {
     settings->show();
 }
@@ -34,7 +34,7 @@ int SerialManager::openSerialPort()
             //ui->actionConnect->setEnabled(false);
             //ui->actionDisconnect->setEnabled(true);
             //ui->actionConfigure->setEnabled(false);
-            parent->showSerialStatus(
+            parent->showAppInfo(
             QObject::tr("Connected to %1 : %2, %3, %4, %5, %6")
                                                .arg(p.name).arg(p.stringBaudRate).arg(p.stringDataBits)
                                                .arg(p.stringParity).arg(p.stringStopBits).arg(p.stringFlowControl)
@@ -42,7 +42,7 @@ int SerialManager::openSerialPort()
     } else {
         QMessageBox::critical(parent, QObject::tr("Error"), serial->errorString());
 
-        parent->showSerialStatus(QObject::tr("Open error"));
+        parent->showAppInfo(QObject::tr("Open error"));
     }
 
     return 0;
@@ -56,7 +56,7 @@ void SerialManager::write(QByteArray writeData)
     }
     else
     {
-        parent->showSerialStatus(QObject::tr("No data sent: device not open"));
+        parent->showAppInfo(QObject::tr("No data sent: device not open"));
     }
 }
 
